@@ -1,0 +1,48 @@
+# material definition
+name wood
+UCD_id 2
+normal_emissivity 0.95
+diffuse_fraction 0.9
+specular_lobe_size 200
+
+name mortar
+UCD_id 3
+normal_emissivity 0.91
+diffuse_fraction 0.85
+specular_lobe_size 300
+
+name stone
+UCD_id 4
+normal_emissivity 0.96
+diffuse_fraction 0.90
+specular_lobe_size 500
+
+name roof_tile
+UCD_id 5
+normal_emissivity 0.90
+diffuse_fraction 0.50
+specular_lobe_size 1000
+
+name asphalt
+UCD_id 7
+normal_emissivity 0.92
+diffuse_fraction 0.70
+specular_lobe_size 400
+
+name window_blinds
+UCD_id 8
+normal_emissivity 0.95
+diffuse_fraction 0.9
+specular_lobe_size 200
+
+name glass
+UCD_id 9
+normal_emissivity 0.92
+diffuse_fraction 0
+specular_lobe_size 1.0E+5
+
+#custom material, defined with a curve of 91 emissivity values (from 90 to 0 degrees of viewing angle)
+name customMat1
+UCD_id 12
+emissivity_curve 0.4650 0.5115 0.5528 0.5895 0.6223 0.6517 0.6779 0.7015 0.7228 0.7419 0.7591 0.7747 0.7889 0.8016 0.8132 0.8238 0.8333 0.8420 0.8500 0.8572 0.8637 0.8697 0.8752 0.8802 0.8847 0.8889 0.8927 0.8961 0.8993 0.9022 0.9048 0.9072 0.9095 0.9115 0.9133 0.9150 0.9165 0.9179 0.9192 0.9204 0.9215 0.9224 0.9233 0.9241 0.9249 0.9255 0.9261 0.9267 0.9272 0.9277 0.9281 0.9284 0.9288 0.9291 0.9294 0.9296 0.9298 0.9300 0.9302 0.9303 0.9305 0.9306 0.9307 0.9308 0.9309 0.9310 0.9310 0.9311 0.9312 0.9312 0.9312 0.9313 0.9313 0.9313 0.9313 0.9313 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 
+specular_lobe_size 200
