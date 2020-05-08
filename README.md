@@ -96,6 +96,7 @@ The tag *normal_emissivity* indicates the emissivity value at normal direction &
 
 The tag *diffuse_fraction* allows to generate an interpolation between the Schlick (Fresnel) emissivity curve and a diffuse curve of constant emissivity (using the value defined at *normal_emissivity*). This can be used to describe different levels of roughness in the materials, where for example glass is 0% diffuse, while wood is 90% diffuse. Note that this values define the emissivity behavior only; the reflectivity is handled with the next tag. Some examples of interpolated curves are:
 
+![Emissivities](https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/emissivity.png)
 
 ### Execution
 
