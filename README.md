@@ -12,7 +12,7 @@ ThRend input data is handled through two configuration files: *viewSettings* and
 *viewSettings* contains the configuration of the scene, camera and output images. 
 *materials* describes the infrared properties of the materials to be used. 
 
-Example *viewSettings* file: 
+#### Example *viewSettings* file: 
 ```
 #scene settings                                               
 sceneFile bayonne14hs.inp
@@ -47,19 +47,22 @@ tmax 40
 tmin_reflected -10
 tmax_reflected 30
 ```
-In this example, the scene geometry and nodal temperatures are loaded from the AVS UCD file *bayonne14hs.inp*. This kind of file can be exported from most thermal software, and its specifications can be found in [1]. For example, in Cast3m, you can export your CHPOINT *chp1* to this format with the following command: 
+In this example, the scene geometry and nodal temperatures are loaded from the AVS UCD file *bayonne14hs.inp*, as indicated by the tag *sceneFile*. This kind of file can be exported from most thermal software, and its specifications can be found in [1]. For example, in Cast3m, you can export your CHPOINT *chp1* to this format with the following command: 
 ``` 
 SORT AVS geo1 chp1
 ``` 
 Currently, ThRend supports geometries (*geo1*) composed of quad and tri sufraces. 
 
-The skyTempsFile line specifies the file where to find the sky temperatures. This file has only one line with 10 values indicating the temperature of the sky in different zenith angles (specified in kelvin, from the zenith into the horizon with 10 degrees steps):
+The *skyTempsFile* tag specifies the file where to find the sky temperatures. This file has only one line with 10 values indicating the temperature of the sky in different zenith angles (specified in kelvin, from the zenith into the horizon with 10 degrees steps):
 ``` tsky file
 233.6 235.4 238.4 242.6 248 254.6 262.4 271.4 281.6 293.0
 ``` 
 These temperatures are used for rays that do not hit any geometry. If you do not want to use this alternative, just input a fully closed mesh (eg. a room or a sky box).
 
-The camera description is self-explanatory. The line *aa 16* indicates to use 16 primary rays per pixel for antialiasing. Please beware that the execution time is linear with respect to this number, so try to keep it as small as possible. If you do not want antialiasing, just put *aa 1*.
+The following tags set the camera properties, which are pretty self-explanatory. 
+The tag *aa* indicates the number of primary rays per pixel for antialiasing. Please beware that the execution time of ThRend is linear with respect to this number, so try to keep it as small as possible. If you do not want antialiasing, just put *aa 1*.
+
+The tag *reflSamples* indicates the number of reflected rays to cast per pixel. You want to have a number of rays that ensures sufficiently good sampling. 
 
 ### Output data
 
