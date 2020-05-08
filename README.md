@@ -90,8 +90,9 @@ specular_lobe_size 1.0E+5
 
 This file contains the definition of the infrared properties of the materials. Each material is associated with a different color in the UCD file. The idea here is to have the elements grouped by color (e.g. Cast3m colors), where each color has its own material properties. The tag *name* indicates the name of the created material, while the tag *UCD_id* indicates the associated id in the geometry file.
 
-The tag *normal_emissivity* indicates the emissivity value at normal direction $e_n$. This value is used to generate a directional emissivity curve following Schlick approximation [2]:
-h<sub>&epsilon (&theta);</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
+The tag *normal_emissivity* indicates the emissivity value at normal direction &epsilon;<sub>n</sub>. This value is used to generate a directional emissivity curve following Schlick approximation [2]:
+
+&epsilon; (&theta;) = (1 - &epsilon;<sub>n</sub>) + &epsilon;<sub>n</sub>(1 - cos(&theta;)<sup>5</sup>
 
 ### Execution
 
