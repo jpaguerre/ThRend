@@ -64,7 +64,33 @@ The tag *aa* indicates the number of primary rays per pixel for antialiasing. Pl
 
 The tag *reflSamples* indicates the number of reflected rays to cast per pixel. You want to have a number of rays that ensures sufficiently good sampling. 
 
-The tag *colormapFile* indicates the file where to find the colormap specification of the output, using the same format as MATLAB colormaps (each line contains an RGB color). The tags *tmin* and *tmax* indicate the colormap temperature limits (in celsius) used for the output (for example, minimum temperature 10C and maximum 40C). *tmin_reflected* and *tmax_reflected* are the equivalent for the reflected temperature output image, which in this example are lower because most of the reflected temperature correspond to the cold sky. 
+The tag *colormapFile* indicates the file where to find the colormap specification of the output, using the same format as MATLAB colormaps (each line contains one RGB color). The tags *tmin* and *tmax* indicate the colormap temperature limits (in celsius) used for the output (for example, minimum temperature 10C and maximum 40C). *tmin_reflected* and *tmax_reflected* are the equivalent for the reflected temperature output image, which in this example are lower because most of the reflected temperature correspond to the cold sky. 
+
+#### Example of *viewSettings* file: 
+``` 
+# material definition
+name wood
+UCD_id 2
+normal_emissivity 0.95
+diffuse_fraction 0.9
+specular_lobe_size 200
+
+name mortar
+UCD_id 3
+normal_emissivity 0.91
+diffuse_fraction 0.85
+specular_lobe_size 300
+
+name glass
+UCD_id 9
+normal_emissivity 0.92
+diffuse_fraction 0
+specular_lobe_size 1.0E+5
+``` 
+
+This file contains the definition of the infrared properties of the materials. Each material is associated with a different color in the UCD file. The idea here is to have the elements grouped by color (e.g. Cast3m colors), where each color has its own material properties. The tag *name* indicates the name of the created material, while the tag *UCD_id* indicates the associated id in the geometry file.
+
+The tag *normal_emissivity* indicates the emissivity value at normal direction. This value is used to generate a directional emissivity curve following Schlick approximation
 
 ### Execution
 
