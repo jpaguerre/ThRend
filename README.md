@@ -51,7 +51,7 @@ In this example, the scene geometry and nodal temperatures are loaded from the A
 ``` 
 SORT AVS geo1 chp1
 ``` 
-Currently, ThRend supports geometries (*geo1*) composed of quad and tri sufraces. 
+Currently, ThRend supports geometries (*geo1*) composed of quad and tri sufraces, but it should be very easy to adapt the code to handle other element types.
 
 The *skyTempsFile* tag specifies the file where to find the sky temperatures. This file has only one line with 10 values indicating the temperature of the sky in different zenith angles (specified in kelvin, from the zenith into the horizon with 10 degrees steps):
 ``` tsky file
