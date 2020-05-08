@@ -96,6 +96,23 @@ The tag *normal_emissivity* indicates the emissivity value at normal direction &
 
 The tag *diffuse_fraction* allows to generate an interpolation between the Schlick (Fresnel) emissivity curve and a diffuse curve of constant emissivity (using the value defined at *normal_emissivity*). This can be used to describe different levels of roughness in the materials, where for example glass is 0% diffuse, while wood is 90% diffuse. Note that this values define the emissivity behavior only; the reflectivity is handled with the next tag. Some examples of interpolated curves are:
 
+![Emissivities](https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/emissivity.png)
+
+Two types of reflections can be used in ThRend: glossy and diffuse reflections. 
+Glossy reflections are handled through importance sampling of the modified Phong BRDF model [3]. Hammersley sampling [4] is used to choose the ray directions. The tag *specular_lobe_size* indicates the size of the specular lobe; some examples of this value are:
+
+![Specsize](https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/specsize.png)
+
+
+Diffuse reflections, on the other hand, are handled with Beckers-and-Beckers view factor sampling []. A purely diffuse reflection can be obtained by setting *specular_lobe_size* to be -1:
+``` 
+name diffuseMaterial
+UCD_id 11
+normal_emissivity 0.9
+diffuse_fraction 0.7
+specular_lobe_size -1
+``` 
+
 
 ### Execution
 
@@ -106,6 +123,8 @@ The tag *diffuse_fraction* allows to generate an interpolation between the Schli
 ### References
 [1] AVS-UCD file format description. site: https://dav.lbl.gov/archive/NERSC/Software/express/help6.1/help/reference/dvmac/UCD_Form.htm. Accessed: May 8, 2020.
 [2] Schlick, C. (1994, August). An inexpensive BRDF model for physically‐based rendering. In Computer graphics forum (Vol. 13, No. 3, pp. 233-246). Edinburgh, UK: Blackwell Science Ltd.
+[3] Lafortune, Eric and Willems, Yves. Using the modified Phong reflectance model for physically based rendering. Report 197. Departement Computerwetenschappen, KU Leuven, Nov. 1994, 19 6.
+[4] Suffern, K. (2016). Ray Tracing from the Ground up. CRC Press.
 
 
 
