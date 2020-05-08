@@ -102,8 +102,13 @@ The tag *diffuse_fraction* allows to generate an interpolation between the Schli
 ![Emissivities](https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/emissivity.png)
 
 Two types of reflections can be used in ThRend: glossy and diffuse reflections. 
-Glossy reflections are handled through importance sampling of the modified Phong BRDF model [3]. Hammersley sampling [4] is used to choose the ray directions. The tag *specular_lobe_size* indicates the size of the specular lobe; some examples of this value are:
+Glossy reflections are handled through importance sampling of the modified Phong BRDF model [3]. Hammersley sampling [4] is used to choose the ray directions. The tag *specular_lobe_size* indicates the size of the specular lobe, as defined by the following probability density function (where *n* is the specular_lobe_size):
 
+<p align="center">
+<img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/pdf.png" width="25%" alt="centered image">
+</p>
+
+Here are some examples of sampling using different lobe sizes:
 <p align="center">
 <img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/specsize.png" width="65%" alt="centered image">
 </p>
