@@ -12,7 +12,7 @@ ThRend input data is handled through two configuration files: *viewSettings* and
 *viewSettings* contains the configuration of the scene, camera and output images. 
 *materials* describes the infrared properties of the materials to be used. 
 
-#### Example *viewSettings* file: 
+#### Example of *viewSettings* file: 
 ```
 #scene settings                                               
 sceneFile bayonne14hs.inp
