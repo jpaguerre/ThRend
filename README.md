@@ -1,6 +1,10 @@
 # ThRend
 Infrared rendering for thermography simulation
 
+<p align="center">
+<img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/summary.png" width="90%" alt="centered image">
+</p>
+
 ### Introduction
 
 ThRend is a ray-tracing-based renderer of infrared radiation. Based on the Embree ray-tracing kernels, ThRend is designed to fastly generate simulated thermograms based on few input data. 
