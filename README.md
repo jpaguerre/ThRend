@@ -1,5 +1,8 @@
-# ThRend
-Infrared rendering for thermography simulation
+# ThRend: 
+**Infrared rendering for thermography simulation**
+<p align="center">
+<img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/summary.png" width="90%" alt="centered image">
+</p>
 
 ### Introduction
 
@@ -92,7 +95,7 @@ This file contains the definition of the infrared properties of the materials. E
 
 The tag *normal_emissivity* indicates the emissivity value at normal direction &epsilon;<sub>n</sub>. This value is used to generate a directional emissivity curve following Schlick's approximation [2]:
 
-&epsilon; (&theta;) =  &epsilon;<sub>n</sub>) - &epsilon;<sub>n</sub>(1 - cos(&theta;)<sup>5</sup>
+&epsilon; (&theta;) =  &epsilon;<sub>n</sub> - &epsilon;<sub>n</sub>(1 - cos(&theta;))<sup>5</sup>
 
 The tag *diffuse_fraction* allows to generate an interpolation between the Schlick (Fresnel) emissivity curve and a diffuse curve of constant emissivity (using the value defined at *normal_emissivity*). This can be used to describe different levels of roughness in the materials, where for example glass is 0% diffuse, while wood is 90% diffuse. Note that this values define the emissivity behavior only; the reflectivity is handled with the next tag. Some examples of interpolated curves are:
 
