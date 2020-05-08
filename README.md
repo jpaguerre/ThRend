@@ -138,8 +138,16 @@ The results will be saved in the folder "executable/results". This executable is
 ### Output data
 ThRend generates one main result and 4 auxiliary files. The main result is the file "apparent.png", which stores the rendered apparent surface temperature of the scene. The 4 auxiliary files are: "real.png", which shows the result as if every material was a blackbody, "emis.png", which stores a grayscale image showing the computed emissivity for each pixel, "refl.png" which shows the reflected temperature for each pixel (using the second colormap scale defined in *viewSettings*), and the file "temps", which stores the apparent temperatures as a matrix of numbers that can be loaded directly into matlab. 
 
+This is the output of the default project that comes with the executable:
+
+<p align="center">
+<img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/results.png" width="80%" alt="centered image">
+</p>
+
 ### Source code and compilation
-ThRend was developed in C++ with Visual Studio 2013. All the source code and VS projects are uploaded in this github page. There are many dependancies but they are all portable, so you should be able to download and compile the project directly. The only prequiste is Visual Studio 2013 or greater. If you need a Linux compilation project, do not hessitate to contact me. The libraries used by ThRend are the following:
+ThRend was developed in C++ with Visual Studio 2013. All the source code and VS projects are uploaded in this github page. There are many dependancies but they are all portable, so you should be able to download and compile the project directly. The only prequiste is Visual Studio 2013 or greater. If you need a Linux compilation project, do not hessitate to contact me. 
+
+The libraries used by ThRend are the following:
 1. Intel Embree 3 for ray tracing operations (https://www.embree.org/)
 2. GLM for vector and matrix operations (https://glm.g-truc.net/0.9.9/index.html).
 3. FreeImage for saving images (http://freeimage.sourceforge.net/).
