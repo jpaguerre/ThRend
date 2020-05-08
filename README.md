@@ -64,6 +64,8 @@ The tag *aa* indicates the number of primary rays per pixel for antialiasing. Pl
 
 The tag *reflSamples* indicates the number of reflected rays to cast per pixel. You want to have a number of rays that ensures sufficiently good sampling. 
 
+### Execution
+
 ### Output data
 
 ### Source code and compilation
