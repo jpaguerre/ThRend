@@ -1,6 +1,5 @@
-# ThRend
-Infrared rendering for thermography simulation
-
+# ThRend: 
+**Infrared rendering for thermography simulation**
 <p align="center">
 <img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/summary.png" width="90%" alt="centered image">
 </p>
