@@ -10,9 +10,49 @@ This software can be considered as a post-processing tool that takes the output 
 
 ThRend input data is handled through two configuration files: *viewSettings* and *materials*. 
 *viewSettings* contains the configuration of the scene, camera and output images. 
-*materials* describes the infrared properties of the materials to be used.
+*materials* describes the infrared properties of the materials to be used. 
 
+Example *viewSettings* file: 
+```
+#scene settings                                               
+sceneFile bayonne14hs.inp
+skyTempsFile tsky  
 
+# camera and image settings
+# location of the camera:
+cameraCenter  -87.6051 9.4538 1.0
+
+# direction of the camera:
+cameraDirection 0.9623 -0.21 0.172
+cameraUp 0 0 1
+
+# field of view of camera in vertical direction (in degrees)
+fovVertical 24
+
+# resolution of the image 
+imageWidth 180
+imageHeight 250
+
+# Primary rays per pixel (for antialiasing)
+aa 16
+
+# Number of reflected rays per pixel
+reflSamples 100;
+
+# Colormap settings
+colormapFile colormap
+tmin 10
+tmax 40
+
+tmin_reflected -10
+tmax_reflected 30
+```
+In this example, the scene geometry and nodal temperatures are loaded from the AVS UCD file bayonne14hs.inp. This kind of file can be exported from most thermal software, and its specifications can be found here: https://dav.lbl.gov/archive/NERSC/Software/express/help6.1/help/reference/dvmac/UCD_Form.htm. 
+For example, in Cast3m, you can export your CHPOINT chp1 to file this format with: 
+``` 
+SORT AVS geo1 chp1
+``` 
+Currently, ThRend supports geometries (geo1) composed of quad and tri sufraces. 
 
 
 
