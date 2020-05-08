@@ -126,12 +126,23 @@ specular_lobe_size 200
 ``` 
 The tag *emissivity_curve* tag replaces the *normal_emissivity* and *diffuse_fraction* tags. It allows defining a custom curve by entering 91 emissivity values: one value for each incidence angle (from 90 to 0 degrees).
 
-
 ### Execution
+If you want to try ThRend without compiling it, just download the folder "executable/". You will find all the configuration files and an example of scene. Go into "binary/", and execute "ThRend.exe". You should see a console similar to this one:
+
+<p align="center">
+<img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/console.png" width="45%" alt="centered image">
+</p>
+
+The results will be saved in the folder "executable/results". This executable is only compatible with Windows 8/10 x64. If you need a Linux executable, do not hessitate to contact me.
 
 ### Output data
+ThRend generates one main result and 4 auxiliary files. The main result is the file "apparent.png", which stores the rendered apparent surface temperature of the scene. The 4 auxiliary files are: "real.png", which shows the result as if every material was a blackbody, "emis.png", which stores a grayscale image showing the computed emissivity for each pixel, "refl.png" which shows the reflected temperature for each pixel (using the second colormap scale defined in *viewSettings*), and the file "temps", which stores the apparent temperatures as a matrix of numbers that can be loaded directly into matlab. 
 
 ### Source code and compilation
+ThRend was developed in C++ with Visual Studio 2013. All the source code and VS projects are uploaded in this github page. There are many dependancies but they are all portable, so you should be able to download and compile the project directly. The only prequiste is Visual Studio 2013 or greater. If you need a Linux compilation project, do not hessitate to contact me. The libraries used by ThRend are the following:
+1. Intel Embree 3 for ray tracing operations (https://www.embree.org/)
+2. GLM for vector and matrix operations (https://glm.g-truc.net/0.9.9/index.html).
+3. FreeImage for saving images (http://freeimage.sourceforge.net/).
 
 ### References
 [1] AVS-UCD file format description. site: https://dav.lbl.gov/archive/NERSC/Software/express/help6.1/help/reference/dvmac/UCD_Form.htm. Accessed: May 8, 2020.
