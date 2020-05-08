@@ -51,7 +51,7 @@ In this example, the scene geometry and nodal temperatures are loaded from the A
 ``` 
 SORT AVS geo1 chp1
 ``` 
-Currently, ThRend supports geometries (*geo1*) composed of quad and tri sufraces, but it should be very easy to adapt the code to handle other element types.
+Currently, ThRend supports geometries (*geo1*) composed of quad and tri surfaces, but it should be very easy to adapt the code to handle other element types.
 
 The *skyTempsFile* tag specifies the file where to find the sky temperatures. This file has only one line with 10 values indicating the temperature of the sky in different zenith angles (specified in kelvin, from the zenith into the horizon with 10 degrees steps):
 ``` tsky file
@@ -64,7 +64,7 @@ The tag *aa* indicates the number of primary rays per pixel for antialiasing. Pl
 
 The tag *reflSamples* indicates the number of reflected rays to cast per pixel. You want to have a number of rays that ensures sufficiently good sampling. 
 
-The tag *colormapFile* indicates the file where to find the colormap specification of the output, using the same format as MATLAB colormaps (each line contains one RGB color). The tags *tmin* and *tmax* indicate the colormap temperature limits (in celsius) used for the output (for example, minimum temperature 10C and maximum 40C). *tmin_reflected* and *tmax_reflected* are the equivalent for the reflected temperature output image, which in this example are lower because most of the reflected temperature correspond to the cold sky. 
+The tag *colormapFile* indicates the file where to find the colormap specification of the output, using the same format as MATLAB colormaps (each line contains one RGB color). The tags *tmin* and *tmax* indicate the colormap temperature limits (in Celsius) used for the output (for example, minimum temperature 10C and maximum 40C). *tmin_reflected* and *tmax_reflected* are the equivalent for the reflected temperature output image, which in this example are lower because most of the reflected temperature correspond to the cold sky. 
 
 #### Example of *materials* file: 
 ``` 
@@ -90,7 +90,7 @@ specular_lobe_size 1.0E+5
 
 This file contains the definition of the infrared properties of the materials. Each material is associated with a different color in the UCD file. The idea here is to have the elements grouped by color (e.g. Cast3m colors), where each color has its own material properties. The tag *name* indicates the name of the created material, while the tag *UCD_id* indicates the associated id in the geometry file.
 
-The tag *normal_emissivity* indicates the emissivity value at normal direction &epsilon;<sub>n</sub>. This value is used to generate a directional emissivity curve following Schlick approximation [2]:
+The tag *normal_emissivity* indicates the emissivity value at normal direction &epsilon;<sub>n</sub>. This value is used to generate a directional emissivity curve following Schlick's approximation [2]:
 
 &epsilon; (&theta;) =  &epsilon;<sub>n</sub>) - &epsilon;<sub>n</sub>(1 - cos(&theta;)<sup>5</sup>
 
@@ -133,10 +133,10 @@ If you want to try ThRend without compiling it, just download the folder "execut
 <img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/console.png" width="45%" alt="centered image">
 </p>
 
-The results will be saved in the folder "executable/results". This executable is only compatible with Windows 8/10 x64. If you need a Linux executable, do not hessitate to contact me.
+The results will be saved in the folder "executable/results". This executable is only compatible with Windows 8/10 x64. If you need a Linux executable, do not hesitate to contact me.
 
 ### Output data
-ThRend generates one main result and 4 auxiliary files. The main result is the file "apparent.png", which stores the rendered apparent surface temperature of the scene. The 4 auxiliary files are: "real.png", which shows the result as if every material was a blackbody, "emis.png", which stores a grayscale image showing the computed emissivity for each pixel, "refl.png" which shows the reflected temperature for each pixel (using the second colormap scale defined in *viewSettings*), and the file "temps", which stores the apparent temperatures as a matrix of numbers that can be loaded directly into matlab. 
+ThRend generates one main result and 4 auxiliary files. The main result is the file "apparent.png", which stores the rendered apparent surface temperature of the scene. The 4 auxiliary files are: "real.png", which shows the result as if every material was a blackbody, "emis.png", which stores a grayscale image showing the computed emissivity for each pixel, "refl.png" which shows the reflected temperature for each pixel (using the second colormap scale defined in *viewSettings*), and the file "temps", which stores the apparent temperatures as a matrix of numbers that can be loaded directly into Matlab. 
 
 This is the output of the default project that comes with the executable:
 
@@ -145,7 +145,7 @@ This is the output of the default project that comes with the executable:
 </p>
 
 ### Source code and compilation
-ThRend was developed in C++ with Visual Studio 2013. All the source code and VS projects are uploaded in this github page. There are many dependancies but they are all portable, so you should be able to download and compile the project directly. The only prequiste is Visual Studio 2013 or greater. If you need a Linux compilation project, do not hessitate to contact me. 
+ThRend was developed in C++ with Visual Studio 2013. All the source code and VS projects are uploaded in this Github page. There are many dependencies but they are all portable, so you should be able to download and compile the project directly. The only prerequisite is Visual Studio 2013 or greater. If you need a Linux compilation project, do not hesitate to contact me. 
 
 The libraries used by ThRend are the following:
 1. Intel Embree 3 for ray tracing operations (https://www.embree.org/)
