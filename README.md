@@ -141,7 +141,7 @@ ThRend generates one main result and 4 auxiliary files. The main result is the f
 This is the output of the default project that comes with the executable:
 
 <p align="center">
-<img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/results.png" width="80%" alt="centered image">
+<img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/results.png" width="70%" alt="centered image">
 </p>
 
 ### Source code and compilation
@@ -154,9 +154,13 @@ The libraries used by ThRend are the following:
 
 ### References
 [1] AVS-UCD file format description. site: https://dav.lbl.gov/archive/NERSC/Software/express/help6.1/help/reference/dvmac/UCD_Form.htm. Accessed: May 8, 2020.
+
 [2] Schlick, C. (1994, August). An inexpensive BRDF model for physically‐based rendering. In Computer graphics forum (Vol. 13, No. 3, pp. 233-246). Edinburgh, UK: Blackwell Science Ltd.
+
 [3] Lafortune, Eric and Willems, Yves. Using the modified Phong reflectance model for physically based rendering. Report 197. Departement Computerwetenschappen, KU Leuven, Nov. 1994, 19 6.
+
 [4] Suffern, K. (2016). Ray Tracing from the Ground up. CRC Press.
+
 [5] Beckers, B., and Beckers, P. (2016, September). Fast and accurate view factor generation. In FICUP, An International Conference on Urban Physics (Vol. 9).
 
 
