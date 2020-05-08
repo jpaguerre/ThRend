@@ -47,18 +47,17 @@ tmax 40
 tmin_reflected -10
 tmax_reflected 30
 ```
-In this example, the scene geometry and nodal temperatures are loaded from the AVS UCD file bayonne14hs.inp. This kind of file can be exported from most thermal software, and its specifications can be found here: https://dav.lbl.gov/archive/NERSC/Software/express/help6.1/help/reference/dvmac/UCD_Form.htm. 
-For example, in Cast3m, you can export your CHPOINT chp1 to file this format with: 
+In this example, the scene geometry and nodal temperatures are loaded from the AVS UCD file bayonne14hs.inp. This kind of file can be exported from most thermal software, and its specifications can be found in [1]. For example, in Cast3m, you can export your CHPOINT *chp1* to this format with the following command: 
 ``` 
 SORT AVS geo1 chp1
 ``` 
-Currently, ThRend supports geometries (geo1) composed of quad and tri sufraces. 
+Currently, ThRend supports geometries (*geo1*) composed of quad and tri sufraces. 
 
 
 
 
-
-
+# References
+[1] AVS-UCD file format description. site: https://dav.lbl.gov/archive/NERSC/Software/express/help6.1/help/reference/dvmac/UCD_Form.htm. Accessed: May 8, 2020.
 
 
 
