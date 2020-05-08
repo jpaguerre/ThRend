@@ -64,6 +64,8 @@ The tag *aa* indicates the number of primary rays per pixel for antialiasing. Pl
 
 The tag *reflSamples* indicates the number of reflected rays to cast per pixel. You want to have a number of rays that ensures sufficiently good sampling. 
 
+The tag *colormapFile* indicates the file where to find the colormap specification of the output, using the same format as MATLAB colormaps (each line contains an RGB color). The tags *tmin* and *tmax* indicate the colormap temperature limits (in celsius) used for the output (for example, minimum temperature 10C and maximum 40C). *tmin_reflected* and *tmax_reflected* are the equivalent for the reflected temperature output image, which in this example are lower because most of the reflected temperature correspond to the cold sky. 
+
 ### Execution
 
 ### Output data
