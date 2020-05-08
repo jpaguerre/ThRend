@@ -1,0 +1,25 @@
+﻿Build started 11/4/2019 18:44:30.
+     1>Project "C:\Users\Jose\Desktop\embree-minimal\embree-minimal\embree-minimal.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Users\Jose\Desktop\embree-minimal\embree-minimal\glm" /Zi /nologo /W3 /WX- /sdl /Od /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /openmp /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
+         main.cpp
+     1>main.cpp(71): warning C4244: 'initializing' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>main.cpp(66): warning C4101: 'dir' : unreferenced local variable
+     1>main.cpp(115): warning C4267: '+=' : conversion from 'size_t' to 'GLuint', possible loss of data
+     1>main.cpp(131): warning C4267: '+=' : conversion from 'size_t' to 'GLuint', possible loss of data
+     1>main.cpp(138): warning C4273: 'omp_get_thread_num' : inconsistent dll linkage
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\omp.h(56) : see previous definition of 'omp_get_thread_num'
+     1>main.cpp(161): warning C4018: '<' : signed/unsigned mismatch
+     1>main.cpp(192): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>main.cpp(193): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     1>main.cpp(195): warning C4018: '<' : signed/unsigned mismatch
+     1>main.cpp(206): warning C4018: '<' : signed/unsigned mismatch
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jose\Desktop\embree-minimal\x64\Debug\embree-minimal.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Jose\Desktop\embree-minimal\embree-minimal\lib\embree-3.5.2\lib" embree3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\Jose\Desktop\embree-minimal\x64\Debug\embree-minimal.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jose\Desktop\embree-minimal\x64\Debug\embree-minimal.lib" /MACHINE:X64 x64\Debug\ac3d.obj
+         x64\Debug\main.obj
+         embree-minimal.vcxproj -> C:\Users\Jose\Desktop\embree-minimal\x64\Debug\embree-minimal.exe
+     1>Done Building Project "C:\Users\Jose\Desktop\embree-minimal\embree-minimal\embree-minimal.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.13

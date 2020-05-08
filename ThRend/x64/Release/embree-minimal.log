@@ -1,0 +1,58 @@
+﻿Build started 5/8/2020 3:04:23 PM.
+     1>Project "C:\Users\Jose\Desktop\embree-rendering\embree-minimal\embree-minimal.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (x64\Release\) contains files shared from another project (embree-minimal.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Users\Jose\Desktop\embree-rendering\embree-minimal\\glm" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /openmp /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\colormap.h(43): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\colormap.h(50): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\colormap.h(56): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\colormap.h(63): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\EmbreeUtils.h(88): warning C4267: '=' : conversion from 'size_t' to 'int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(26): warning C4244: '=' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(50): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(52): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(53): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(67): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(68): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(84): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(96): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(98): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(134): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(135): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(137): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(140): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(174): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(176): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\reflections.h(177): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\materialLoader.h(36): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\materialLoader.h(38): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\materialLoader.h(38): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\embree-rendering\embree-minimal\materialLoader.h(39): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(55): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>main.cpp(61): warning C4273: 'omp_get_thread_num' : inconsistent dll linkage
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\omp.h(56) : see previous definition of 'omp_get_thread_num'
+     1>main.cpp(90): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(107): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(113): warning C4244: 'initializing' : conversion from 'double' to 'const int', possible loss of data
+     1>main.cpp(127): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(128): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>main.cpp(151): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(152): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(156): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(157): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(214): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(227): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>main.cpp(228): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>main.cpp(235): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(236): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jose\Desktop\embree-rendering\x64\Release\ThRend.exe" /NOLOGO /LIBPATH:"C:\Users\Jose\Desktop\embree-rendering\embree-minimal\lib" /LIBPATH:"C:\Users\Jose\Desktop\embree-rendering\embree-minimal\lib\embree-3.5.2\lib" embree3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib FreeImage.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\Jose\Desktop\embree-rendering\x64\Release\ThRend.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jose\Desktop\embree-rendering\x64\Release\ThRend.lib" /MACHINE:X64 x64\Release\main.obj
+         Generating code
+         Finished generating code
+         embree-minimal.vcxproj -> C:\Users\Jose\Desktop\embree-rendering\x64\Release\ThRend.exe
+     1>Done Building Project "C:\Users\Jose\Desktop\embree-rendering\embree-minimal\embree-minimal.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.63
