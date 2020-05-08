@@ -6,8 +6,8 @@
 
 ### Introduction
 
-ThRend is a ray-tracing-based renderer of infrared radiation. Based on the Embree ray-tracing kernels, ThRend is designed to fastly generate simulated thermograms based on few input data. 
-This software can be considered as a post-processing tool that takes the output of other thermal simulation software and allows to simulate the behavior of long-wave radiation reaching an infrared sensor (thermal camera).
+ThRend is a ray-tracing-based renderer of infrared radiation. Based on the Embree ray-tracing kernels, ThRend is designed to rapidly generate simulated thermograms based on few input data. 
+This software can be considered as a post-processing tool that takes the output of other thermal simulation software and allows to simulate the behavior of long-wave radiation reaching an infrared sensor (thermal camera). ThRend gives the user the possibility of trying different emissivity and reflectivity configurations to render thermal images.
 
 ### Input data
 
