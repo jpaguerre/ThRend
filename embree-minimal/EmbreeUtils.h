@@ -11,6 +11,8 @@
 #include <sstream>
 #include <iostream>
 
+const float EPS = 1e-4f;
+
 int triOffset = 0;
 unsigned int triID;
 unsigned int quadID;
@@ -55,21 +57,17 @@ RTCScene buildSceneEmbree(std::vector<glm::vec3> &sc_vertices,
 	//	rtcSetDeviceProperty(device, RTC_DEVICE_PROPERTY_BACKFACE_CULLING_ENABLED, 1);
 	//	ssize_t pr = rtcGetDeviceProperty(device, RTC_DEVICE_PROPERTY_BACKFACE_CULLING_ENABLED);
 	//	std::cout << "BFC prop is " <<  pr<<  " \n";
-	std::cout << "ACA 1\n";
 	eScene = rtcNewScene(device);
-	std::cout << "ACA 2\n";
 
 	RTCBuffer vertices =
 		rtcNewSharedBuffer(device, sc_vertices.data(),
 		sizeof(glm::vec3) * sc_vertices.size());
-	std::cout << "ACA 3\n";
 
 	if (sc_triangles.size() > 0) {
 		RTCGeometry triGeom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
 		rtcSetGeometryBuffer(triGeom, RTC_BUFFER_TYPE_VERTEX, 0,
 			RTC_FORMAT_FLOAT3, vertices, 0, sizeof(glm::vec3),
 			sc_triangles.size());
-		std::cout << "ACA 4\n";
 
 		GLuint* indexT = (GLuint*)rtcSetNewGeometryBuffer(
 			triGeom, RTC_BUFFER_TYPE_INDEX, 0, RTC_FORMAT_UINT3,
@@ -80,18 +78,14 @@ RTCScene buildSceneEmbree(std::vector<glm::vec3> &sc_vertices,
 		}
 		//filter to avoid self hit
 		rtcSetGeometryIntersectFilterFunction(triGeom, intersectionFilter);
-		std::cout << "ACA 5\n";
 
 		rtcSetGeometryVertexAttributeCount(triGeom, 1);
 		//		rtcSetSharedGeometryBuffer(geom, RTC_BUFFER_TYPE_INDEX, 0, RTC_FORMAT_UINT, hair_indices, 0, sizeof(unsigned int), 1);
 		rtcSetSharedGeometryBuffer(triGeom, RTC_BUFFER_TYPE_VERTEX_ATTRIBUTE, 0, RTC_FORMAT_FLOAT, temps.data(), 0, sizeof(float), temps.size());
-		std::cout << "ACA 6\n";
 
 		rtcCommitGeometry(triGeom);
 		triID = rtcAttachGeometry(eScene, triGeom);
 		triOffset = sc_triangles.size() / 3;
-		std::cout << "ACA 7\n";
-
 	}
 	if (sc_quads.size() > 0) {
 		RTCGeometry quadGeom =
@@ -115,10 +109,8 @@ RTCScene buildSceneEmbree(std::vector<glm::vec3> &sc_vertices,
 		rtcCommitGeometry(quadGeom);
 		quadID = rtcAttachGeometry(eScene, quadGeom);
 	}
-	std::cout << "ACA 8\n";
 
 	rtcCommitScene(eScene);
-	std::cout << "ACA 9\n";
 
 	return eScene;
 }

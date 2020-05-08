@@ -1,3 +1,6 @@
+#ifndef OrtoNormalBase
+#define OrtoNormalBase
+
 #include <glm.hpp>
 
 
@@ -41,3 +44,5 @@ glm::vec3 ONB::WorldToLocal(const glm::vec3 &v) {
 glm::vec3 ONB::LocalToWorld(const glm::vec3 &v) {
 	return  (v.x * s) + (v.y * t) + (v.z * n);
 }
+
+#endif

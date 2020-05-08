@@ -41,6 +41,16 @@ normal_emissivity 0.92
 diffuse_fraction 0
 specular_lobe_size 1.0E+5
 
+#the following materials are not used in the main example, 
+#but are defined to show you how to use diffuse reflection and custom emissivity.
+
+#material with pure diffuse reflections, set with -1 in specular_lobe_size
+name diffuseMaterial
+UCD_id 11
+normal_emissivity 0.9
+diffuse_fraction 0.7
+specular_lobe_size -1
+
 #custom material, defined with a curve of 91 emissivity values (from 90 to 0 degrees of viewing angle)
 name customMat1
 UCD_id 12

@@ -3,7 +3,6 @@
 #define TASKING_TBB
 //#define EMBREE_BACKFACE_CULLING 1
 
-#include "ONB.h"
 
 #include <cmath>
 
@@ -21,12 +20,12 @@
 #include <iostream>
 #include <map>
 
-#include "ac3d.h"
-#include "beckers.h"
 #include "emissivity.h"
 #include "UCDimporter.h"
 #include "colormap.h"
-
+#include "reflections.h"
+#include "ONB.h"
+#include <chrono>  // for high_resolution_clock
 
 #include <windows.h>
 #include <iostream>
@@ -43,10 +42,7 @@
 #include <algorithm>    // std::sort
 #include <time.h>       /* time */
 //MATLAB
-#include <mat.h>
-#include <matrix.h>
-#include <mat.h>
-#include <mex.h>   
+ 
 #include <windows.h>
 #include <process.h> 
 #include "FreeImage.h"
@@ -58,10 +54,8 @@
 #include <iostream>
 
 const float STE_BOLZ = 5.670367e-08;
-const float EPS = 1e-4f;
 const int NUMTHREADS = 8;
 
-int NRAYS_GLOSSY;
 
 std::mutex ffLock;
 int totalProcessed = 0;
@@ -92,94 +86,10 @@ void saveData(float* data, int width, int height){
 	ffs_file.close();
 }
 
-Result getSpecularlyReflectedTemperature(float* tsky, glm::vec3 reflDir, glm::vec3 hitPoint, float globalID){
-	Result r;
-
-	RTCRay ray;
-	ray.org_x = hitPoint.x; ray.org_y = hitPoint.y;	ray.org_z = hitPoint.z;
-	ray.tfar = 1000.0f; ray.tnear = EPS; ray.time = 0; ray.id = 0;
-	//avoid self hit
-	ray.flags = globalID;
-	ray.dir_x = reflDir.x; 	ray.dir_y = reflDir.y; ray.dir_z = reflDir.z;
-
-	RTCRayHit query;
-	RTCIntersectContext context;
-	rtcInitIntersectContext(&context);
-	query.ray = ray;
-	query.hit.geomID = RTC_INVALID_GEOMETRY_ID;
-	query.hit.primID = RTC_INVALID_GEOMETRY_ID;
-	rtcIntersect1(eScene, &context, &query);
-	float t;
-	if (query.hit.geomID != RTC_INVALID_GEOMETRY_ID) {
-		glm::vec3 color(0.0f, 0.0f, 0.0f);
-
-		r.gID = query.hit.geomID;
-		r.pID = query.hit.primID;
-		float u = query.hit.u;
-		float v = query.hit.v;
-
-		{
-			rtcInterpolate0(rtcGetGeometry(eScene, r.gID), r.pID, u, v, RTC_BUFFER_TYPE_VERTEX_ATTRIBUTE, 0, &t, 1);
-		}
-	}
-	else {
-		float angle = asin(reflDir.z) * 180 / M_PI;
-		if (angle > 0 && angle < 90){
-			int angleL = floor(angle / 10);
-			int angleU = ceil(angle / 10);
-			float rest = angle / 10 - angleL;
-			t = (1 - rest)*tsky[9 - angleL] + rest*tsky[9 - angleU];//- 5.
-		}
-		else
-			t = 275.0;
-	}
-	r.val = t;
-	return r;
-}
-
-float cosAngleBetween(glm::vec3 v1, glm::vec3 v2){
-	float dot = glm::dot(v1, v2);
-	float lenSq1 = sqrt(v1.x*v1.x + v1.y*v1.y + v1.z*v1.z);
-	float lenSq2 = sqrt(v2.x*v2.x + v2.y*v2.y + v2.z*v2.z);
-	return (dot / sqrt(lenSq1 * lenSq2));
-	//	return acos(dot / sqrt(lenSq1 * lenSq2));
-}
-
-//http://www.cim.mcgill.ca/~derek/ecse689_a3.html
-vec3 specLobe(ONB base, float e1, float e2, float N){
-	float pp = pow(e1, (2 / (N + 1)));
-	float x = sqrt(1 - pp)*cos(2 * M_PI*e2);
-	float y = sqrt(1 - pp)*sin(2 * M_PI*e2);
-	float z = pow(e1, (1 / (N + 1)));
-
-	vec3 vec(x, y, z);
-
-	vec = base.LocalToWorld(normalize(vec));
-	return normalize(vec);;
-}
-
-float RadicalInverse_VdC(uint bits)
-{
-	bits = (bits << 16u) | (bits >> 16u);
-	bits = ((bits & 0x55555555u) << 1u) | ((bits & 0xAAAAAAAAu) >> 1u);
-	bits = ((bits & 0x33333333u) << 2u) | ((bits & 0xCCCCCCCCu) >> 2u);
-	bits = ((bits & 0x0F0F0F0Fu) << 4u) | ((bits & 0xF0F0F0F0u) >> 4u);
-	bits = ((bits & 0x00FF00FFu) << 8u) | ((bits & 0xFF00FF00u) >> 8u);
-	return float(bits) * 2.3283064365386963e-10; // / 0x100000000
-}
-
-vec2 Hammersley(uint i, uint N)
-{
-	return vec2(float(i) / float(N), RadicalInverse_VdC(i));
-}
-
-#include <chrono>  // for high_resolution_clock
-
-
 void printProgress(double percentage) {
 	if (percentage > 0.95) percentage=1.0;
 	int barLength = 60;	float pos = percentage * barLength;
-	std::cout << "[";
+	std::cout << " [";
 	for (int i = 0; i != barLength; ++i){
 		if (i < pos) std::cout << "|";
 		else std::cout << " "; 	}
@@ -203,6 +113,7 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 	float fovR = fovU / aspectRatio;
 	const int AA = round(sqrt(s.aa));
 
+	//allocate memory for the output images
 	RGBQUAD *apColors = (RGBQUAD*)malloc(width*height*sizeof(RGBQUAD));
 	RGBQUAD *reColors = (RGBQUAD*)malloc(width*height*sizeof(RGBQUAD));
 	RGBQUAD *diffColors = (RGBQUAD*)malloc(width*height*sizeof(RGBQUAD));
@@ -211,12 +122,16 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 
 	int countMAL = 0;
 	int countBIEN = 0;
-
 	totalProcessed = 0;
-	//COMPUTE
+
+	//Beckers subdivision for the case of diffuse reflection
+	float rings = ceil((-1 + sqrt(NRAYS_GLOSSY)) / 2);
+	int nRaysDiffuse = 1 + 4 * rings*(rings + 1); // n >= al n original
+	float	Drho = 1 / (2 * rings + 1); //Delta rho
+	//
 	omp_set_num_threads(NUMTHREADS);
 	float* reflTAnt = (float*)malloc(NUMTHREADS*sizeof(float));
-
+	//allocate memory for the intermediate antialisiasing results
 	colorInt* apAA = (colorInt*)malloc(sizeof(colorInt)*NUMTHREADS*AA*AA);
 	colorInt* reAA = (colorInt*)malloc(sizeof(colorInt)*NUMTHREADS*AA*AA);
 	colorInt* diffAA = (colorInt*)malloc(sizeof(colorInt)*NUMTHREADS*AA*AA);
@@ -305,37 +220,10 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 						}
 						else{
 							float reflT = 0;
-					
-							dir = 2.0f * glm::dot(hitNormal, -originalDir) * hitNormal + originalDir;
-							float theta = (angulo < 5 ? angulo : 5) * M_PI / 180.0;
-							float sinAngleMAX = sin(theta);
-							int nRaysX = round(sqrt(NRAYS_GLOSSY));
-							int count = 0;
-							ONB base(normalize(dir));
-							for (int rx = 0; rx < nRaysX; rx++)
-								for (int ry = 0; ry < nRaysX; ry++){
-									vec2 Xi = Hammersley(rx*nRaysX + ry, nRaysX*nRaysX);
-									float x = Xi.x;
-									float y = Xi.y;
-
-									vec3 perturbed = specLobe(base, x, y, specN);
-									Result res = getSpecularlyReflectedTemperature(tsky,perturbed, orig, -1);
-									if ((res.gID == gID) && (res.pID == pID)){
-										reflT += res.val;
-										count++;
-									}
-									else{
-										reflT += res.val;
-										count++;
-									}
-
-								}
-							if (count > 0){
-								reflT = reflT / (count);
-								reflTAnt[omp_get_num_threads()] = reflT;
-							}
-							else{
-								reflT = reflTAnt[omp_get_num_threads()];
+							if (specN == -1)//DIFFUSE REFLECTION
+								reflT = getDiffuselyReflectedTemperature(tsky, orig, base, rings, Drho, nRaysDiffuse);
+							else{           //GLOSSY REFLECTION
+								reflT = getGlossyReflectedTemperature(tsky, orig, originalDir, hitNormal, angulo, specN, gID, pID, reflTAnt);
 							}
 							int ang1 = floor(angulo);
 							int ang2 = ceil(angulo);
@@ -437,10 +325,6 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 
 	saveData(tempData, width, height);
 
-//	std::cout << "countBIEN, countMAL, total " << countBIEN << " " << countMAL << " " << width*height << "\n";
-	std::cout << "Thermography generated successfully \n";
-	std::cout << "You can close this window \n";
-
 	//SAVE IMAGE
 	std::stringstream ss1;
 	ss1 << "../results/real.png";
@@ -458,6 +342,9 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 	saveImage(apColors, width, height, ss2.str());
 	saveImage(diffColors, width, height, ss3.str());
 	saveImage(emisColors, width, height, ss4.str());
+
+	std::cout << "Thermography generated and saved successfully \n";
+	std::cout << "You can close this window \n";
 
 	delete reColors;
 	delete apColors;
