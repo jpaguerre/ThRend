@@ -98,7 +98,7 @@ settings loadSettings(std::string filename){
 			linestream >> x;
 			s.MAX_BOUNCES = x;
 			if (s.MAX_BOUNCES < 1){
-				std::cout << "ERROR: please input MAX_BOUNCES greater than 0.\n";
+				std::cout << "WARNING: MAX_BOUNCES set to 1, lower values are not allowed. \n";
 				s.MAX_BOUNCES = 1;
 			}
 		}
