@@ -135,6 +135,7 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 	colorInt* reAA = (colorInt*)malloc(sizeof(colorInt)*NUMTHREADS*AA*AA);
 	colorInt* diffAA = (colorInt*)malloc(sizeof(colorInt)*NUMTHREADS*AA*AA);
 	colorInt* emisAA = (colorInt*)malloc(sizeof(colorInt)*NUMTHREADS*AA*AA);
+	float* tempAA = (float*)malloc(sizeof(float)*NUMTHREADS*AA*AA);
 
 	float dfovR = fovR/width;
 	float dfovU = fovR/height;
@@ -209,7 +210,6 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 
 						ONB base(hitNormal);
 						glm::vec3 dirLocal = base.WorldToLocal(-originalDir);
-
 						dirLocal = glm::normalize(dirLocal);
 						float angulo = (asin(dirLocal.z) * 180 / M_PI);
 
@@ -219,29 +219,29 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 						}
 						else{
 							float reflT = 0;
-							if (specN == -1)//DIFFUSE REFLECTION
-								reflT = getDiffuselyReflectedTemperature(tsky, orig, base, rings, Drho, nRaysDiffuse);
-							else{           //GLOSSY REFLECTION
-								reflT = getGlossyReflectedTemperature(tsky, orig, originalDir, hitNormal, angulo, specN, gID, pID, reflTAnt);
-							}
 							int ang1 = floor(angulo);
 							int ang2 = ceil(angulo);
 							float coef = angulo - ang1;
-
 							float emis = (1 - coef)*emiT[ang1] + coef*emiT[ang2];
-							//emis = 0.95;
 							float refl = 1 - emis;
-							float directFlux = emis*pow(t, 4);
-							float reflectedFlux = refl*pow(reflT, 4.0);
-							aparentT = pow(directFlux + reflectedFlux, 1.0 / 4.0);
+							float directFlux = pow(t, 4);
+							float reflectedFlux; 
 
+							if (specN == -1){//DIFFUSE REFLECTION
+								reflT = getDiffuselyReflectedTemperature(tsky, orig, base, rings, Drho, nRaysDiffuse);
+								reflectedFlux = refl*pow(reflT, 4.0);
+							}
+							else{           //GLOSSY REFLECTION
+								reflectedFlux = getGlossyReflectedFlux(refl, tsky, orig, originalDir, hitNormal, angulo, specN, reflTAnt,matIDs, matProps);
+								reflT = pow(reflectedFlux, 1.0 / 4.0);
+							}
+							
+							aparentT = pow(emis*directFlux + refl*reflectedFlux, 1.0 / 4.0);
 							apColor = colormap[getColor(aparentT)];
 							refColor = colormap[getColor2(reflT)];
-
 							countBIEN++;
 
-							tempData[i*height + j] = aparentT;
-
+							tempAA[omp_get_thread_num()*AA*AA + iAA*AA + jAA] = aparentT;
 							emisAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].r = (int)(emis * 255);
 							emisAA[omp_get_thread_num()*AA*AA + iAA*AA + jAA].g = (int)(emis * 255);
 							emisAA[omp_get_thread_num()*AA*AA + iAA*AA + jAA].b = (int)(emis * 255);
@@ -261,6 +261,7 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 
 					}
 					else{
+						tempAA[omp_get_thread_num()*AA*AA + iAA*AA + jAA] = 0;
 						apAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].r = (int)(255);
 						apAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].g = (int)(255);
 						apAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].b = (int)(255);
@@ -277,12 +278,11 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 						emisAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].g = (int)(255);
 						emisAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].b = (int)(255);
 					}
-
-
 				}
 			}
 			//gather Anti Aliasing
 			colorInt ap = { 0, 0, 0 }, re = { 0, 0, 0 }, diff = { 0, 0, 0 }, emis = { 0, 0, 0 };
+			float temp = 0;
 			for (int iAA = 0; iAA < AA; iAA++){
 				for (int jAA = 0; jAA < AA; jAA++){
 					ap.r += apAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].r;
@@ -300,6 +300,8 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 					emis.r += emisAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].r;
 					emis.g += emisAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].g;
 					emis.b += emisAA[omp_get_thread_num()*AA*AA+iAA*AA + jAA].b;
+
+					temp += tempAA[omp_get_thread_num()*AA*AA + iAA*AA + jAA];
 				}
 			}
 
@@ -318,12 +320,12 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 			emisColors[i*height + j].rgbRed  =  (BYTE) (emis.r / (AA*AA));
 			emisColors[i*height + j].rgbGreen=  (BYTE) (emis.g / (AA*AA));
 			emisColors[i*height + j].rgbBlue =  (BYTE) (emis.b / (AA*AA));
-			
+
+			tempData[i*height + j] = temp / (AA*AA);
 		}
 	}
 
 	saveData(tempData, width, height);
-
 	//SAVE IMAGE
 	std::stringstream ss1;
 	ss1 << "../results/real.png";
@@ -380,6 +382,7 @@ int main(){
 	tmin_reflected = s.tmin_reflected; tmax_reflected = s.tmax_reflected;
 
 	NRAYS_GLOSSY = s.reflSamples;
+	MAX_BOUNCES = s.MAX_BOUNCES;
 
 	material* matProps = loadMaterials("..\\materials");
 	//printMaterials(matProps);

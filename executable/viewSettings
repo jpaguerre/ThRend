@@ -20,6 +20,9 @@ imageHeight 250
 # Primary rays per pixel (for antialiasing)
 aa 16
 
+# Maximum bounces, greater than 0
+MAX_BOUNCES 2
+
 # Number of reflected rays per pixel
 reflSamples 100;
 

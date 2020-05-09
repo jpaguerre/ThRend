@@ -22,6 +22,7 @@ typedef struct{
 	int	imageWidth;
 	int	imageHeight;
 	int aa;
+	int MAX_BOUNCES;
 	int reflSamples;
 	float tmin;
 	float tmax;
@@ -91,6 +92,15 @@ settings loadSettings(std::string filename){
 			int x;
 			linestream >> x;
 			s.aa = x;
+		}
+		else if (id == "MAX_BOUNCES"){
+			int x;
+			linestream >> x;
+			s.MAX_BOUNCES = x;
+			if (s.MAX_BOUNCES < 1){
+				std::cout << "ERROR: please input MAX_BOUNCES greater than 0.\n";
+				s.MAX_BOUNCES = 1;
+			}
 		}
 		else if (id == "reflSamples"){
 			int x;
