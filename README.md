@@ -42,6 +42,9 @@ aa 16
 # Number of reflected rays per pixel
 reflSamples 100;
 
+# Maximum bounces, greater than 0
+MAX_BOUNCES 2
+
 # Colormap settings
 colormapFile colormap
 tmin 10
@@ -66,6 +69,8 @@ The following tags set the camera properties, which are pretty self-explanatory.
 The tag *aa* indicates the number of primary rays per pixel for antialiasing. Please beware that the execution time of ThRend is linear with respect to this number, so try to keep it as small as possible. If you do not want antialiasing, just put *aa 1*.
 
 The tag *reflSamples* indicates the number of reflected rays to cast per pixel. You want to have a number of rays that ensures sufficiently good sampling. 
+
+The tag *MAX_BOUNCES* contains the limit of radiation bounces. This number has to be greater than 0 to allow for infrared reflections. Larger number of bounces implies larger execution times. 
 
 The tag *colormapFile* indicates the file where to find the colormap specification of the output, using the same format as MATLAB colormaps (each line contains one RGB color). The tags *tmin* and *tmax* indicate the colormap temperature limits (in Celsius) used for the output (for example, minimum temperature 10C and maximum 40C). *tmin_reflected* and *tmax_reflected* are the equivalent for the reflected temperature output image, which in this example are lower because most of the reflected temperature correspond to the cold sky. 
 
