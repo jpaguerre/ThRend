@@ -118,15 +118,15 @@ Here are some examples of sampling using different roughness:
 <img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/specsize.png" width="65%" alt="centered image">
 </p>
 
-See that a big value of *specular_lobe_size* implies a specular reflection behavior, this is why, in the example above, the material *glass* has a lobe size of 1.0E+5.
+See that a smaller value of *roughness* imply a specular reflection behavior, this is why, in the example above, the material *glass* has the lowest roughness value.
 
-Diffuse reflections, on the other hand, are handled with Beckers-and-Beckers view factor sampling [5]. A purely diffuse reflection can be obtained by setting *specular_lobe_size* to be -1:
+Diffuse reflections, on the other hand, are handled with Beckers-and-Beckers view factor sampling [5]. A purely diffuse reflection can be obtained by setting *roughness* to be -1:
 ``` 
 name diffuseMaterialName
 UCD_id 11
 normal_emissivity 0.9
 diffuse_fraction 0.7
-specular_lobe_size -1
+roughness -1
 ``` 
 
 One final note about material definition is that ThRend supports the definition of custom emissivity curves, such as in this example:
@@ -135,7 +135,7 @@ One final note about material definition is that ThRend supports the definition 
 name customMat1
 UCD_id 12
 emissivity_curve 0.4650 0.5115 0.5528 0.5895 0.6223 0.6517 0.6779 0.7015 0.7228 0.7419 0.7591 0.7747 0.7889 0.8016 0.8132 0.8238 0.8333 0.8420 0.8500 0.8572 0.8637 0.8697 0.8752 0.8802 0.8847 0.8889 0.8927 0.8961 0.8993 0.9022 0.9048 0.9072 0.9095 0.9115 0.9133 0.9150 0.9165 0.9179 0.9192 0.9204 0.9215 0.9224 0.9233 0.9241 0.9249 0.9255 0.9261 0.9267 0.9272 0.9277 0.9281 0.9284 0.9288 0.9291 0.9294 0.9296 0.9298 0.9300 0.9302 0.9303 0.9305 0.9306 0.9307 0.9308 0.9309 0.9310 0.9310 0.9311 0.9312 0.9312 0.9312 0.9313 0.9313 0.9313 0.9313 0.9313 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 0.9314 
-specular_lobe_size 200
+roughness 0.0814
 ``` 
 The tag *emissivity_curve* tag replaces the *normal_emissivity* and *diffuse_fraction* tags. It allows defining a custom curve by entering 91 emissivity values: one value for each incidence angle (from 90 to 0 degrees).
 
