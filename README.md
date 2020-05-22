@@ -118,7 +118,7 @@ Here are some examples of sampling using different roughness:
 <img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/specsize.png" width="65%" alt="centered image">
 </p>
 
-See that a smaller value of *roughness* imply a specular reflection behavior, this is why, in the example above, the material *glass* has the lowest roughness value.
+See that smaller values of *roughness* imply more specular reflection behaviors, this is why, in the example above, the material *glass* has the lowest roughness value.
 
 Diffuse reflections, on the other hand, are handled with Beckers-and-Beckers view factor sampling [5]. A purely diffuse reflection can be obtained by setting *roughness* to be -1:
 ``` 
