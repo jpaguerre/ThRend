@@ -18,7 +18,7 @@ typedef struct{
 	int UCD_id;
 	float normal_emissivity;
 	float diffuse_fraction;
-	float specular_lobe_size;
+	float roughness;
 	float * emisTable;
 	bool custom;
 } material;
@@ -85,10 +85,10 @@ material* loadMaterials(std::string filename){
 			linestream >> x;
 			m.diffuse_fraction = x;
 		}
-		else if (id == "specular_lobe_size"){
+		else if (id == "roughness"){
 			float x;
 			linestream >> x;
-			m.specular_lobe_size = x;
+			m.roughness = x;
 		}
 		else if (id == "emissivity_curve"){
 			float x;
@@ -121,7 +121,7 @@ void printMaterials(material* matProps){
 			cout << "normal_emissivity " << m.normal_emissivity << "\n";
 			cout << "diffuse_fraction " << m.diffuse_fraction << "\n";
 		}
-		cout << "specular_lobe_size " << m.specular_lobe_size << "\n";
+		cout << "roughness " << m.roughness << "\n";
 
 		for (int j = 0; j < 91; j++)
 			cout << m.emisTable[j] << " ";

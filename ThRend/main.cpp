@@ -141,19 +141,25 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 	float dfovU = fovR/height;
 #pragma omp parallel for 
 	for (int i = 0; i < width; i++){
+		//	for (int i = 50; i < 100; i++){
 		ffLock.lock();
 		if (totalProcessed % (width/30) == 0)
 			printProgress(totalProcessed / (float)width);
 			//std::cout << 100.0f*totalProcessed / width << "%\n";
 		totalProcessed++;
 		ffLock.unlock();
-
+		//		for (int j = height - 218; j < height - 167; j++){
 		for (int j = 0; j < height; j++){
 			float normalized_i = ((float)i / width) - 0.5;
 			float normalized_j = ((float)j / height) - 0.5;
 
 			for (int iAA = 0; iAA < AA; iAA++){
 				for (int jAA = 0; jAA < AA; jAA++){
+
+					int idAA = iAA*AA + jAA;
+					//this is a rotation angle for the reflections
+					float rotationAngle = (2*M_PI / (AA*AA))*idAA;
+
 					float normalized_iAA = ((float)iAA / AA) - 0.5;
 					float normalized_jAA = ((float)jAA / AA) - 0.5;
 
@@ -206,7 +212,7 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 						glm::vec3 orig = glm::vec3(query.ray.org_x, query.ray.org_y, query.ray.org_z) + query.ray.tfar * originalDir + hitNormal*EPS;
 
 						float * emiT = matProps[matIDs[globalID]].emisTable;
-						float specN = matProps[matIDs[globalID]].specular_lobe_size;
+						float specN = matProps[matIDs[globalID]].roughness;
 
 						ONB base(hitNormal);
 						glm::vec3 dirLocal = base.WorldToLocal(-originalDir);
@@ -232,7 +238,7 @@ void generateThermography(float*tsky, std::vector<int> &matIDs, settings &s, mat
 								reflectedFlux = refl*pow(reflT, 4.0);
 							}
 							else{           //GLOSSY REFLECTION
-								reflectedFlux = getGlossyReflectedFlux(refl, tsky, orig, originalDir, hitNormal, angulo, specN, reflTAnt,matIDs, matProps);
+								reflectedFlux = getGlossyReflectedFlux(refl, tsky, orig, originalDir, hitNormal, angulo, specN, reflTAnt, matIDs, matProps, rotationAngle);
 								reflT = pow(reflectedFlux, 1.0 / 4.0);
 							}
 							

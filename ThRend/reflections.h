@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <glm.hpp>
+#include "glm/gtx/string_cast.hpp"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -145,22 +146,52 @@ Result followSpecularPath2(float* tsky, glm::vec3 reflDir, glm::vec3 hitPoint, f
 		else
 			t = 275.0;
 	}
-	r.val = t;
+
+	r.val = power4(t);;
 	return r;
 }
 
-//http://www.cim.mcgill.ca/~derek/ecse689_a3.html
-vec3 specLobe(ONB base, float e1, float e2, float N){
-	float pp = pow(e1, (2 / (N + 1)));
-	float x = sqrt(1 - pp)*cos(2 * M_PI*e2);
-	float y = sqrt(1 - pp)*sin(2 * M_PI*e2);
-	float z = pow(e1, (1 / (N + 1)));
-
-	vec3 vec(x, y, z);
-
-	vec = base.LocalToWorld(normalize(vec));
-	return normalize(vec);;
+// Implemented by jpaguerre based on eduardof MATLAB version of:
+// [Walter et al] "Microfacet Models for Refraction through Rough Surfaces"
+// We use GGX sampling and add weight with G functions
+inline float G1vmGGX(vec3 wo, vec3 nn, vec3 mm, float thetaV, float alphaG){
+	//eq. 34
+	float Xplus = (dot(wo, mm) / dot(wo, nn))>0 ? 1.0 : 0.0;
+	float G1om = Xplus * (2.0 / (1 + sqrt(1 + alphaG*alphaG*tan(thetaV)*tan(thetaV))));
+	return G1om;
 }
+
+
+vec3 specLobeMicrofacetGGX(ONB baseNorm, vec3 wi, float e1, float e2, float alphaG, float &weight, float rotationAngle){
+	//eqs. 35, 36
+	vec3 nn(0., 0., 1.);
+	float thetam = atan(alphaG*sqrt(e1)/sqrt(1-e1));
+	float psim = 2.0f * M_PI*e2;
+
+	float x = sin(thetam)*cos(psim);
+	float y = sin(thetam)*sin(psim);
+	float z = cos(thetam);
+	//rotate around Z axis when AA is ON. If AA is off, rotationAngle=0
+	float rotated_x = x*cos(rotationAngle) - y*sin(rotationAngle);
+	float rotated_y = x*sin(rotationAngle) + y*cos(rotationAngle);
+	//
+	vec3 mm(rotated_x, rotated_y, z); mm = normalize(mm);
+
+	wi = baseNorm.WorldToLocal(wi);	wi = normalize(wi);
+	vec3 wo = 2.0f * (dot(mm, wi)) * mm - wi; wo = normalize(wo);
+	if (wo.z < 0)
+		return vec3(0, 0, 0);
+	else{
+		//eqs. 23,41 
+		float G1om = G1vmGGX(wo, nn, mm, acos(dot(wo, nn)), alphaG);
+		float G1im = G1vmGGX(wi, nn, mm, acos(dot(wi, nn)), alphaG);
+		float Giom = G1im*G1om;
+		weight = abs(dot(wi, mm))*Giom / (abs(dot(wi, nn))*abs(dot(mm, nn)));
+		wo = baseNorm.LocalToWorld(wo); wo = normalize(wo);
+		return wo;
+	}
+}
+
 
 float RadicalInverse_VdC(uint bits)
 {
@@ -178,31 +209,36 @@ vec2 Hammersley(uint i, uint N)
 }
 
 float getGlossyReflectedFlux(float refl,float* tsky, vec3 orig, vec3 originalDir, vec3 hitNormal, 
-					float angulo, float specN, float* reflTAnt, std::vector<int> &matIDs, material *matProps){
+				float angulo, float alphaG, float* reflTAnt, std::vector<int> &matIDs, material *matProps, float rotationAngle){
 	float reflFlux = 0;
 
 	vec3 dir = 2.0f * glm::dot(hitNormal, -originalDir) * hitNormal + originalDir;
-	float theta = (angulo < 5 ? angulo : 5) * M_PI / 180.0;
-	float sinAngleMAX = sin(theta);
 	int nRaysX = round(sqrt(NRAYS_GLOSSY));
 	int count = 0;
-	ONB base(normalize(dir));
+	float weightTot = 0;
+	ONB baseNormal(normalize(hitNormal));
+	originalDir = normalize(originalDir);
+
 	for (int rx = 0; rx < nRaysX; rx++)
 		for (int ry = 0; ry < nRaysX; ry++){
 			vec2 Xi = Hammersley(rx*nRaysX + ry, nRaysX*nRaysX);
 			float x = Xi.x;
 			float y = Xi.y;
-
-			vec3 perturbed = specLobe(base, x, y, specN);
-			vec3 hitPoint = orig;
-			Result res = followSpecularPath(tsky, perturbed, hitPoint, matIDs, matProps);
-			reflFlux += res.val;
-			//Result res = followSpecularPath2(tsky, perturbed, orig, -1);
-			//reflFlux += power4(res.val);
-			count++;
+			float weight;
+			vec3 perturbed = specLobeMicrofacetGGX(baseNormal, -originalDir, x, y, alphaG, weight, rotationAngle);
+			if (length(perturbed) < 0.001){
+				//reflected vec is autohit
+			}
+			else{
+				vec3 hitPoint = orig;
+				Result res = followSpecularPath(tsky, perturbed, hitPoint, matIDs, matProps);
+				reflFlux += res.val * weight;
+				weightTot += weight;
+				count++;
+			}
 		}
 	if (count > 0){
-		reflFlux = reflFlux / (count);
+		reflFlux = reflFlux / (weightTot);
 		reflTAnt[omp_get_thread_num()] = reflFlux;
 	}
 	else{

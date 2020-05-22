@@ -1,4 +1,4 @@
-﻿Build started 5/9/2020 7:01:35 PM.
+﻿Build started 5/22/2020 7:22:37 PM.
      1>Project "C:\Users\Jose\Desktop\ThRend\ThRend\ThRend.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (x64\Release\) contains files shared from another project (embree-minimal.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -13,29 +13,29 @@
      1>c:\users\jose\desktop\thrend\thrend\materialLoader.h(38): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\jose\desktop\thrend\thrend\materialLoader.h(38): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
      1>c:\users\jose\desktop\thrend\thrend\materialLoader.h(39): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(71): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(76): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(72): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
      1>c:\users\jose\desktop\thrend\thrend\reflections.h(77): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(84): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(86): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(78): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(85): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
      1>c:\users\jose\desktop\thrend\thrend\reflections.h(87): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(96): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(114): warning C4244: '=' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(138): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(140): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(88): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(97): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(115): warning C4244: '=' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(139): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
      1>c:\users\jose\desktop\thrend\thrend\reflections.h(141): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(155): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(156): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(172): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(185): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(187): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(219): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(220): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(222): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(225): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(259): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(261): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jose\desktop\thrend\thrend\reflections.h(262): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(142): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(159): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(160): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(169): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(203): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(216): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(255): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(256): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(258): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(261): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(295): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(297): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\jose\desktop\thrend\thrend\reflections.h(298): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
      1>main.cpp(55): warning C4305: 'initializing' : truncation from 'double' to 'const float'
      1>main.cpp(61): warning C4273: 'omp_get_thread_num' : inconsistent dll linkage
                  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\omp.h(56) : see previous definition of 'omp_get_thread_num'
@@ -44,16 +44,17 @@
      1>main.cpp(113): warning C4244: 'initializing' : conversion from 'double' to 'const int', possible loss of data
      1>main.cpp(127): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
      1>main.cpp(128): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>main.cpp(152): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
      1>main.cpp(153): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(157): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(158): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(214): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(222): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>main.cpp(223): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>main.cpp(232): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(236): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>main.cpp(239): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(154): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(161): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(163): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(164): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(220): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(228): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>main.cpp(229): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>main.cpp(238): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(242): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>main.cpp(245): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jose\Desktop\ThRend\x64\Release\ThRend.exe" /NOLOGO /LIBPATH:C:\Users\Jose\Desktop\ThRend\ThRend\lib /LIBPATH:"C:\Users\Jose\Desktop\ThRend\ThRend\lib\embree-3.5.2\lib" embree3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib FreeImage.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\Jose\Desktop\ThRend\x64\Release\ThRend.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Jose\Desktop\ThRend\x64\Release\ThRend.lib" /MACHINE:X64 x64\Release\main.obj
          Generating code
@@ -63,4 +64,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.17
+Time Elapsed 00:00:02.89
