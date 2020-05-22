@@ -81,19 +81,19 @@ name wood
 UCD_id 2
 normal_emissivity 0.95
 diffuse_fraction 0.9
-specular_lobe_size 200
+roughness 0.0995
 
 name mortar
 UCD_id 3
 normal_emissivity 0.91
 diffuse_fraction 0.85
-specular_lobe_size 300
+roughness 0.0814
 
 name glass
 UCD_id 9
 normal_emissivity 0.92
 diffuse_fraction 0
-specular_lobe_size 1.0E+5
+roughness 0.0141
 ``` 
 
 This file contains the definition of the infrared properties of the materials. Each material is associated with a different color in the UCD file. The idea here is to have the elements grouped by color (e.g. Cast3m colors), where each color has its own material properties. The tag *name* indicates the name of the created material, while the tag *UCD_id* indicates the associated id in the geometry file.
@@ -107,13 +107,13 @@ The tag *diffuse_fraction* allows to generate an interpolation between the Schli
 ![Emissivities](https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/emissivity.png)
 
 Two types of reflections can be used in ThRend: glossy and diffuse reflections. 
-Glossy reflections are handled through importance sampling of the modified Phong BRDF model [3]. Hammersley sampling [4] is used to choose the ray directions. The tag *specular_lobe_size* indicates the size of the specular lobe, as defined by the following probability density function (where *n* is the specular_lobe_size):
+Glossy reflections are handled through importance sampling of the microfacet BRDF with GGX [3]. Hammersley sampling [4] is used to choose the ray directions. The tag *roughness* indicates the roughness of the material, as defined by the following probability density function (where *alpha_g* is the roughness):
 
 <p align="center">
 <img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/pdf.png" width="25%" alt="centered image">
 </p>
 
-Here are some examples of sampling using different lobe sizes:
+Here are some examples of sampling using different roughness:
 <p align="center">
 <img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/specsize.png" width="65%" alt="centered image">
 </p>
@@ -170,7 +170,7 @@ The libraries used by ThRend are the following:
 
 [2] Schlick, C. (1994, August). An inexpensive BRDF model for physically‐based rendering. In Computer graphics forum (Vol. 13, No. 3, pp. 233-246). Edinburgh, UK: Blackwell Science Ltd.
 
-[3] Lafortune, Eric and Willems, Yves. Using the modified Phong reflectance model for physically based rendering. Report 197. Departement Computerwetenschappen, KU Leuven, Nov. 1994, 19 6.
+[3] Walter, B., Marschner, S. R., Li, H., & Torrance, K. E. (2007). Microfacet Models for Refraction through Rough Surfaces. Rendering techniques, 2007, 18th.
 
 [4] Suffern, K. (2016). Ray Tracing from the Ground up. CRC Press.
 
