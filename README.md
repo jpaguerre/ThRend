@@ -93,7 +93,7 @@ name glass
 UCD_id 9
 normal_emissivity 0.92
 diffuse_fraction 0
-roughness 0.0141
+roughness 0.0000
 ``` 
 
 This file contains the definition of the infrared properties of the materials. Each material is associated with a different color in the UCD file. The idea here is to have the elements grouped by color (e.g. Cast3m colors), where each color has its own material properties. The tag *name* indicates the name of the created material, while the tag *UCD_id* indicates the associated id in the geometry file.
