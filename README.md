@@ -6,6 +6,7 @@
 
 ### How to cite
 DOI: https://doi.org/10.26868/25222708.2021.30435
+
 Aguerre, Jose; Fernandez, Eduardo. "ThRend: a ray tracing module for infrared rendering of urban scenes". Building Simulation Conference Proceedings, 2021.
 
 ### Introduction
