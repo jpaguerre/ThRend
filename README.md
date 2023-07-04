@@ -4,6 +4,10 @@
 <img src="https://github.com/jpaguerre/ThRend/blob/master/README-IMGS/summary.png" width="90%" alt="centered image">
 </p>
 
+### How to cite
+DOI: https://doi.org/10.26868/25222708.2021.30435
+Aguerre, Jose; Fernandez, Eduardo. "ThRend: a ray tracing module for infrared rendering of urban scenes". Building Simulation Conference Proceedings, 2021.
+
 ### Introduction
 
 ThRend is a ray-tracing-based renderer of infrared radiation. Based on the Embree ray-tracing kernels, ThRend is designed to rapidly generate simulated thermograms based on few input data. 
